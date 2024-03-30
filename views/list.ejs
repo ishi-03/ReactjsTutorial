@@ -1,0 +1,29 @@
+<%- include("header") -%>
+<div>
+<p class="image" style= "background-image: url('images/background.jpg'); background-size: cover; background-repeat: no-repeat;" >
+
+  <div class="box sticky" id="heading">
+    <h1> <%= listTitle %> </h1>
+  </div>
+
+  <div class="box">
+    <%newListItems.forEach(function(item){%>
+      <!-- to delete items in list new form is there -->
+      <form action="/delete" method="post">
+      <div class="item">
+        <input type="checkbox" value="<%= item._id %>" name="checkbox" onChange="this.form.submit()" >
+        <!-- we can simply tap into its name field by this  -->
+        <p><%=  item.name  %></p>
+      </div>
+      <input type="hidden" name="listName" value="<%= listTitle %>"></input>
+    </form>
+      <% }) %>
+
+      <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="Enter New-Item" autocomplete="off" required >
+        <button type="submit" name="list" value="<%= listTitle %>">+</button>
+      </form>
+  </div>
+</div>
+
+<%- include("footer") -%>
